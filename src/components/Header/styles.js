@@ -4,14 +4,15 @@ import logo from '../../assets/logo.png';
 export const Wrapper = styled.SafeAreaView`
   flex: 0;
   flex-direction: row;
+  margin-bottom: 80px;
 `;
 
 export const Container = styled.View`
   flex-direction: row;
   flex: 1;
   justify-content: space-between;
-  padding: 20px;
-  background: #141419;
+  padding: 40px 20px;
+  background: #000;
 `;
 
 export const Logo = styled.Image.attrs({

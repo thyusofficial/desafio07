@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  background: #000;
+  background: #141419;
   flex: 1;
 `;
 
 export const Product = styled.View`
   background: #fff;
   padding: 10px;
-  margin: 100px 15px;
+  margin: 15px;
   border-radius: 4px;
   width: 220px;
 `;
