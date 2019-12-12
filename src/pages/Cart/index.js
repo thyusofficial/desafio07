@@ -1,7 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import produce from 'immer';
+
+import * as CartActions from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -26,7 +31,7 @@ import {
   OrderText,
 } from './styles';
 
-function Cart({ cart }) {
+function Cart({ cart, removeFromCart }) {
   return (
     <Container>
       {cart.length ? (
@@ -37,9 +42,9 @@ function Cart({ cart }) {
                 <ProductImage source={{ uri: product.image }} />
                 <ProductDetails>
                   <ProductTitle>{product.title}</ProductTitle>
-                  <ProductPrice>{product.price}</ProductPrice>
+                  <ProductPrice>{product.priceFormatted}</ProductPrice>
                 </ProductDetails>
-                <ProductDelete>
+                <ProductDelete onPress={() => removeFromCart(product.id)}>
                   <Icon name="delete-forever" size={24} color="#7159c1" />
                 </ProductDelete>
               </ProductBody>
@@ -51,7 +56,7 @@ function Cart({ cart }) {
                     size={22}
                   />
                 </ProductControlButton>
-                <ProductAmount>10</ProductAmount>
+                <ProductAmount>{product.amount || 0}</ProductAmount>
                 <ProductControlButton>
                   <Icon name="add-circle-outline" color="#7159c1" size={22} />
                 </ProductControlButton>
@@ -81,4 +86,7 @@ const mapStateToProps = state => ({
   cart: state.cart,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
